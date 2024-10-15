@@ -7,33 +7,108 @@
     <!-- Bootstrap 4 CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="styles.css" />
+    <style>
+        /* Style global pour améliorer le visuel */
+        body {
+            font-family: 'Arial', sans-serif;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+
+        /* Style pour la barre de navigation */
+        .navbar {
+            background-color: #004080; /* Bleu foncé élégant */
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+            color: white !important;
+        }
+
+        .navbar-nav .nav-link {
+            color: white !important;
+            transition: color 0.3s;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #87CEEB !important; /* Bleu ciel sur hover */
+        }
+
+        /* Pour supprimer l'espace entre la barre de navigation et la vidéo */
+        .video-container {
+            margin-top: 0;
+            padding-top: 0;
+        }
+
+        /* Style pour réduire la taille de la vidéo */
+        .video-container video {
+            width: 100%;
+            height: auto;
+        }
+
+        /* Espacement élégant pour les rubriques */
+        .rubriques {
+            margin: 50px 0;
+        }
+
+        /* Amélioration du visuel des rubriques */
+        .rubrique img {
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .rubrique img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .rubrique h3 {
+            font-weight: bold;
+            margin-top: 15px;
+            color: #004080; /* Texte bleu foncé */
+        }
+
+        /* Style pour le footer */
+        footer {
+            background-color: #004080;
+            color: white;
+            padding: 20px 0;
+        }
+
+        footer a {
+            color: #87CEEB;
+            transition: color 0.3s;
+        }
+
+        footer a:hover {
+            color: white;
+        }
+    </style>
 </head>
 <body>
 
     <!-- Barre de navigation -->
-    <nav id="navbar" class="navbar navbar-expand-lg navbar-light fixed-top" >
+    <nav id="navbar" class="navbar navbar-expand-lg navbar-dark fixed-top">
         <div class="container">
-            <!-- <a class="navbar-brand" href="#">Navbar</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-            </button> -->
-
             <a class="navbar-brand" href="#">Ma Librairie</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
+                <span class="navbar-toggler-icon"></span>
             </button>
 
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item ">
-                    <a class="nav-link active" href="Home.html">Accueil </a>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="Home.html">Accueil</a>
                     </li>
                     <li class="nav-item">
-                    <a class="nav-link " href="livre.html">Livres </span></a>
+                        <a class="nav-link" href="livre.html">Livres</a>
                     </li>
                     <li class="nav-item">
-                    <a class="nav-link" href="#">A propos</a>
+                        <a class="nav-link" href="#">A propos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact-section" onclick="toggleContact()">Contact</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
@@ -48,66 +123,127 @@
                 </ul>
             </div>
         </div>
-      </nav>
+    </nav>
 
-    <!-- En-tête -->
-    <header>
-        
-        <div class="container">
-            <h1><b><marquee> BIENVENUE DANS NOTRE BIBLIOTHEQUE EN LIGNE</marquee></b></h1>
-            <p>Explorez un univers de livres électroniques et bien plus encore</p>
-            <a href="livre.html" class="btn btn-primary btn-lg mt-4">Découvrir nos Livres</a>
-        </div>
-    </header>
-
-    <section class="video-container">
-        <h2 class="display-4">Présentation de notre bibliothèque</h2>
-        <p>Regardez cette vidéo pour découvrir notre plateforme, nos fonctionnalités et les livres les plus populaires.</p>
-    
-        <!-- Intégration d'une vidéo locale avec autoplay et muted -->
-        <video autoplay muted loop width="100%">
-            <source src="videos/Extrait-VIDEOS.mp4" type="video/mp4">
-            <!-- Message alternatif si le navigateur ne supporte pas le format vidéo -->
+    <!-- Section vidéo directement sous la barre de navigation -->
+    <section class="video-container text-center">
+        <video autoplay muted loop>
+            <source src="videos/Extrait-VIDEOS.mp4" type="video/mp4" width="80" height="100">
             Votre navigateur ne supporte pas la lecture de cette vidéo.
         </video>
     </section>
-    
-    
 
     <!-- Rubriques : Livres Publiés Récemment -->
-    <section class="rubriques text-center">
-        <div class="container">
-            <h2 class="display-4">Livres Publiés Récemment</h2>
-            <div class="row">
-                <!-- Rubrique 1 -->
-                <div class="col-md-4 rubrique">
-                    <img src="https://source.unsplash.com/350x250/?newbook" alt="Livre Récent 1">
-                    <h3 class="mt-3">Nouveauté : Le Monde de Demain</h3>
-                    <p>Auteur : John Doe</p>
+<section class="rubriques text-center">
+    <div class="container">
+        <h2 class="display-4">Livres Publiés Récemment</h2>
+        
+        <div id="livresCarousel" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="row">
+                        <!-- Rubrique 1 -->
+                        <div class="col-md-4 rubrique">
+                            <img src="videos/Livre1.jpg" alt="Livre1" width="200" height="350">
+                            <h3 class="mt-3">Nouveauté : Sous la cendre le feu</h3>
+                            <p>Auteur : <b>Evelyne MPOUDI NGOLLE</b></p>
+                        </div>
+                        <!-- Rubrique 2 -->
+                        <div class="col-md-4 rubrique">
+                            <img src="videos/Livre2.jpg" alt="Livre2" width="200" height="350">
+                            <h3 class="mt-3">Nouveauté : Petit Jo, enfant des rues</h3>
+                            <p>Auteur : <b>Evelyne MPOUDI NGOLLE</b></p>
+                        </div>
+                        <!-- Rubrique 3 -->
+                        <div class="col-md-4 rubrique">
+                            <img src="videos/Livre6.jpg" alt="Livre6" width="200" height="350">
+                            <h3 class="mt-3">Nouveauté : La conquête de la liberté : De Mirabeau à Mitterrand</h3>
+                            <p>Auteur : <b>Laurent JOFFRIN</b></p>
+                        </div>
+                    </div>
                 </div>
-                <!-- Rubrique 2 -->
-                <div class="col-md-4 rubrique">
-                    <img src="https://source.unsplash.com/350x250/?newbook2" alt="Livre Récent 2">
-                    <h3 class="mt-3">Nouveauté : Voyage à Travers le Temps</h3>
-                    <p>Auteur : Jane Smith</p>
-                </div>
-                <!-- Rubrique 3 -->
-                <div class="col-md-4 rubrique">
-                    <img src="https://source.unsplash.com/350x250/?newbook3" alt="Livre Récent 3">
-                    <h3 class="mt-3">Nouveauté : L'Inconnu des Rues</h3>
-                    <p>Auteur : Albert Martin</p>
+                <div class="carousel-item">
+                    <div class="row">
+                        <!-- Rubrique 4 -->
+                        <div class="col-md-4 rubrique">
+                            <img src="videos/Livre3.jpg" alt="Livre3" width="200" height="350">
+                            <h3 class="mt-3">Nouveauté : La Crémaillère</h3>
+                            <p>Auteur : <b>André Hubert ONANA MFEGE</b></p>
+                        </div>
+                        <!-- Rubrique 5 -->
+                        <div class="col-md-4 rubrique">
+                            <img src="videos/Livre4.jpg" alt="Livre4" width="200" height="350">
+                            <h3 class="mt-3">Nouveauté : Les femmes du bout du monde</h3>
+                            <p>Auteur : <b>Mélissa DA COSTA</b></p>
+                        </div>
+                        <!-- Rubrique 6 -->
+                        <div class="col-md-4 rubrique">
+                            <img src="videos/Livre7.jpg" alt="Livre7" width="200" height="350">
+                            <h3 class="mt-3">Nouveauté : Les silence d'Alexandrie</h3>
+                            <p>Auteur : <b>Michèle GAZIER</b></p>
+                        </div>
+                    </div>
                 </div>
             </div>
+            <a class="carousel-control-prev" href="#livresCarousel" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Précédent</span>
+            </a>
+            <a class="carousel-control-next" href="#livresCarousel" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Suivant</span>
+            </a>
         </div>
-    </section>
+    </br>
+    <h3 class="display-4">Livres les Plus Populaires</h3>
+        <div class="row">
+            <!-- Rubrique 1 -->
+            <div class="col-md-4 rubrique">
+                <img src="videos/Livre1.jpg" alt="Livre1" width="200" height="350">
+                <h3 class="mt-3">Nouveauté : Sous la cendre le feu</h3>
+                <p>Auteur : <B>Evelyne MPOUDI NGOLLE</B></p>
+            </div>
+            <!-- Rubrique 2 -->
+            <div class="col-md-4 rubrique">
+                <img src="videos/Livre2.jpg" alt="Livre2" width="200" height="350">
+                <h3 class="mt-3">Nouveauté : Petit Jo, enfant des rues</h3>
+                <p>Auteur : <b>Evelyne MPOUDI NGOLLE</b></p>
+            </div>
+            <!-- Rubrique 3 -->
+            <div class="col-md-4 rubrique">
+                <img src="videos/Livre6.jpg" alt="Livre6" width="200" height="350">
+                <h3 class="mt-3">Nouveauté : La conquête de la liberté : De Mirabeau à Mitterrand</h3>
+                <p>Auteur : <b>Laurent JOFFRIN</b></p>
+            </div>
+             <!-- Rubrique 4 -->
+            <div class="col-md-4 rubrique">
+                <img src="videos/Livre3.jpg" alt="Livre3" width="200" height="350">
+                <h3 class="mt-3">Nouveauté : La Crémaillère </h3>
+                <p>Auteur : <b>André Hubert ONANA MFEGE</b></p>
+            </div>
+            <!-- Rubrique 5 -->
+            <div class="col-md-4 rubrique">
+                <img src="videos/Livre4.jpg" alt="Livre4" width="200" height="350">
+                <h3 class="mt-3">Nouveauté : Les femmes du bout du monde</h3>
+                <p>Auteur : <b>Mélissa DA COSTA</b></p>
+            </div>
+            <!-- Rubrique 6 -->
+            <div class="col-md-4 rubrique">
+                <img src="videos/Livre7.jpg" alt="Livre7" width="200" height="350">
+                <h3 class="mt-3">Nouveauté : Les silence d'Alexandrie</h3>
+                <p>Auteur : <b>Michèle GAZIER</b></p>
+            </div>
+        </div>
 
+    </div>
+</section>
     <!-- Footer -->
-    <footer>
+    <footer class="text-center py-4">
         <p>&copy; 2024 Bibliothèque en Ligne. Tous droits réservés.</p>
         <p>
             <a href="#">Politique de Confidentialité</a> | 
             <a href="#">Conditions d'utilisation</a> | 
-            <a href="#">Contact</a>
+            <a href="#contact-section" onclick="toggleContact()">Contact</a>
         </p>
     </footer>
 
@@ -115,5 +251,25 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- Script pour afficher et masquer la section Contact -->
+    <script>
+        function toggleContact() {
+            var contactSection = document.getElementById('contact-section');
+            if (contactSection.style.display === 'block') {
+                contactSection.style.display = 'none';
+            } else {
+                contactSection.style.display = 'block';
+            }
+        }
+    </script>
+    <!-- Section Contact masquée par défaut -->
+    <section id="contact-section" class="text-center py-4 bg-light">
+        <h2>Contactez-nous</h2>
+        <p>Pour toute question ou information complémentaire, veuillez nous contacter :</p>
+        <p>3IL LIMOGES</p>
+        <p>Numéro de téléphone : +33 5 55 45 67 89</p>
+        <p>Espace client : <a href="#">Accédez à votre espace personnel</a></p>
+    </section>
 </body>
 </html>
