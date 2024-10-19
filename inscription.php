@@ -13,7 +13,7 @@
 <div class="container d-flex justify-content-center">
     <div class="col-md-6 p-4 border rounded shadow mt-5">
         <h2 class="text-center mb-4">Inscription Utilisateur</h2>
-        <form id="userForm" action="utilisateur.php" method="post">
+        <form id="userForm" action="inscription.php" method="post">
             <div class="form-group">
                 <label for="nom">Nom</label>
                 <input type="text" class="form-control" name="nomu" id="nomu" placeholder="Entrez votre nom" required>
@@ -53,7 +53,7 @@
                 <label for="confirm_password">Confirmez le mot de passe</label>
                 <input type="password" class="form-control" name="confirm_password" id="confirm_password" placeholder="Confirmez votre mot de passe" required>
             </div>
-            <button type="submit" class="btn btn-primary btn-block w-100">S'inscrire</button>
+            <button type="submit" class="btn btn-primary btn-block w-100 mt-4">S'inscrire</button>
         </form>
         <div id="message" class="mt-3 text-center"></div>
     </div>
@@ -61,12 +61,10 @@
 
 <?php
 // Connexion à la base de données
-try {
-    $db = new PDO("mysql:host=localhost;dbname=bdlivre;charset=utf8", "root", "");
-    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    die("Erreur de connexion : " . $e->getMessage());
-}
+include 'connexiondb.php';
+
+// démarrage d'une session
+session_start();
 
 // Vérification des données envoyées par POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -114,7 +112,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                              VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
                     $stmt2 = $db->prepare($sql2);
                     $stmt2->execute([$nomu, $prenomu, $emailu, $adresseu, $telu, $sexeu, $date_naissance, $hashed_password]);
+
+                    // Récupération l'ID de l'utilisateur enregistré
+                    $user_id = $db->lastInsertId();
+                    // Stockage de l'Id dans la session
+                    $_SESSION['user_id'] = $user_id;
+                    // Redirection vers la page avec l'ID de l'utilisateur dans l'URL
+                    header("Location: livre.php?user_id=" . $user_id);
                     echo "<div class='alert alert-success text-center'>Utilisateur enregistré avec succès.</div>";
+                    exit(); // terminer le script après la redirection
                 }
             } catch (PDOException $e) {
                 echo "<div class='alert alert-danger text-center'>Erreur lors de l'inscription : " . $e->getMessage() . "</div>";

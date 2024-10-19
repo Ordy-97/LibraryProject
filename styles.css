@@ -67,6 +67,42 @@
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
+/* Style pour la dropdown de la navbar */
+
+.custom-dropdown {
+    background-color: #004080; /* Adapte la couleur à ton site */
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* Style des éléments de la dropdown */
+.custom-dropdown-item {
+    display: flex;
+    align-items: center;
+    color: #fff; /* Couleur du texte */
+    padding: 10px;
+    font-size: 1.1rem;
+    transition: background-color 0.3s ease-in-out;
+    border-radius: 5px;
+}
+
+/* Style des icônes dans la dropdown */
+.dropdown-icon {
+    margin-right: 10px;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%; /* Rondir l'image */
+    object-fit: cover;
+}
+
+/* Hover effect pour rendre les éléments plus interactifs */
+.custom-dropdown-item:hover {
+    background-color: #0056b3;
+    color: #ffffff;
+    text-decoration: none;
+}
+
 
 
         
@@ -81,13 +117,13 @@
         white-space: nowrap;
         margin: 0 auto; /* Centrage */
         letter-spacing: .15em;
-        animation: typing 4s steps(30, end), blink-caret .75s step-end infinite;
+        animation: typing 7s steps(30, end), blink-caret .75s step-end infinite;
         animation-fill-mode: forwards;
     }
 
     /* Animation de l'écriture progressive */
     @keyframes typing {
-        from { width: 0; opacity: 1; }
+        from { width: 0; opacity: 2; }
         to { width: 100%; }
     }
 
@@ -137,7 +173,7 @@
 .side-div {
     display: none; /* Cachée par défaut sur les petits écrans */
     position: fixed; /* La div reste fixe même en scrollant */
-    top: 30; /* Commence à partir du haut de la div row */
+    
     color: #00264D !important;
     width: 330px; /* Largeur fixe de la colonne */
     height: auto; /* Ajustement automatique de la hauteur */
@@ -145,7 +181,7 @@
     padding: 30px; /* Padding pour un meilleur espacement */
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1); /* Ombre pour effet surélevé */
     border-radius: 10px; /* Coins arrondis pour un look moderne */
-    z-index: 1000; /* S'assurer que la div est visible au-dessus du contenu */
+    z-index: 500; /* S'assurer que la div est visible au-dessus du contenu */
     /* margin-left: 50px; Marges pour centrer latéralement à gauche */
 }
 
