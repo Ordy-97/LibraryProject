@@ -298,3 +298,33 @@ footer a:hover {
     background-color: #007bff; /* Couleur de fond sur survol */
     color: white; /* Changement de couleur de texte */
 }
+
+.modal-body .photo {
+    width: 120px;
+    height: 120px;
+    background-color: #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-body .details {
+    flex-grow: 1;
+}
+
+.conthaut {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.modal-footer .comments {
+    color: #007bff;
+    cursor: pointer;
+}
+
+.btn.btn-secondary {
+    background-color: red;  /* Changer la couleur d'arrière-plan */
+    border-color: red;      /* Changer la couleur de la bordure */
+    color: white;           /* Couleur du texte (pour être visible sur rouge) */
+}
