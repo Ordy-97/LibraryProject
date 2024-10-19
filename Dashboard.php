@@ -1,3 +1,7 @@
+<?php
+        // Démarrer la session
+        session_start();
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -78,34 +82,79 @@
 </head>
 <body>
     <!-- Barre de navigation -->
+
     <nav id="navbar" class="navbar navbar-expand-lg navbar-light fixed-top" >
         <div class="container">
-            <a class="navbar-brand ml-5" href="#">Ma Librairie</a>
+            <a class="navbar-brand" href="#">Ma Librairie</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
 
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item ">
-                    <a class="nav-link" href="Home.html">Accueil </a>
+                    <!-- <li class="nav-item ">
+                        <a class="nav-link" href="Home.php">Accueil </a>
                     </li>
-                    <li class="nav-item ">
-                        <a class="nav-link active" href="livre.html">Livres </a>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="livre.php">Livres</u> </a>
                     </li>
                     <li class="nav-item">
-                    <a class="nav-link" href="#">A propos</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
-                            Mon Compte
-                        </a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">Se connecter</a>
-                            <a class="dropdown-item" href="#">S'inscrire</a>
-                            <a class="dropdown-item" href="#">Mon profil</a>
-                        </div>
-                    </li>
+                        <a class="nav-link" href="#">A propos</a>
+                    </li>     -->
+                    <?php
+                        // Vérifier si l'utilisateur est connecté et si l'ID est dans l'URL
+                        if (isset($_SESSION['user_id']) && isset($_GET['user_id'])) {
+                            $user_id = $_GET['user_id'];
+                    ?>
+                            <!-- Ajout de l'Id aux urls -->
+                            <li class="nav-item ">
+                                <a class="nav-link" href="Home.php?user_id=<?php echo $user_id;?>" >Accueil </a>
+                            </li>
+                            <li class="nav-item active">
+                                <a class="nav-link" href="livre.php?user_id=<?php echo $user_id;?>">Livres</u> </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">A propos</a>
+                            </li> 
+                            <!-- Ajoute l'option dashboard si l'utilisateur est connecté -->
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+                                    <img src="imageL\profile.png" alt="me" height="27px" width="27px" >
+                                </a>
+                                <div class="dropdown-menu custom-dropdown">
+                                    <a class="dropdown-item custom-dropdown-item" href="Dashboard.php?user_id=<?php echo $user_id;?>"><img class="dropdown-icon" src="imageL\dashboard.jpg" alt="me" > Dashboard </a>
+                                    <a class="dropdown-item custom-dropdown-item" href="#"><img class="dropdown-icon" src="imageL\profile.png" alt="me" > Profile </a>
+                                    <a class="dropdown-item custom-dropdown-item" href="logout.php"><img class="dropdown-icon" src="imageL\logout.jpg" alt="me" > Déconnexion </a>
+                                </div>
+                            </li>
+                    <?php
+                        } else {
+                    ?>
+                            <!-- Affichage des urls sans Id -->
+                            <li class="nav-item ">
+                                <a class="nav-link" href="Home.php">Accueil </a>
+                            </li>
+                            <li class="nav-item active">
+                                <a class="nav-link" href="livre.php">Livres</u> </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">A propos</a>
+                            </li> 
+                            <!-- Ajoute l'option de connexion si l'utilisateur n'est pas connecté -->
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+                                    Mon Compte
+                                </a>
+                                <div class="dropdown-menu custom-dropdown">
+                                    <a class="dropdown-item custom-dropdown-item" href="authentification.php">Se connecter</a>
+                                    <a class="dropdown-item custom-dropdown-item" href="inscription.php">S'inscrire</a>
+                                </div>
+                            </li>
+                    <?php
+                            // exit();
+                        }
+                    ?>
+                    
                 </ul>
             </div>
         </div>
@@ -115,6 +164,18 @@
         </form>
     </nav>
 
+    <!-- Récupération de l'Id de utiliasteur connecté à la session -->
+
+    <?php
+        // Vérifier si l'utilisateur est connecté et si l'ID est dans l'URL
+        if (isset($_SESSION['user_id']) && isset($_GET['user_id'])) {
+            $user_id = $_GET['user_id'];
+
+            // Maintenant tu peux utiliser $user_id dans cette page pour afficher des informations personnalisées.
+            echo "Bienvenue, utilisateur avec l'ID " . $user_id;
+            // exit();
+        } 
+    ?>
     <!-- Section avec phrases changeantes -->
     <div id="changing-text" class="mt-5 pt-5">
         Tu es passionné et plein d'inspiration ?

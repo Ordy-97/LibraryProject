@@ -25,6 +25,15 @@
         .liked i {
             color: blue;
         }
+        /* Étoiles vides */
+        .star {
+            cursor: pointer;
+        }
+
+        /* Étoiles remplies */
+        .star.filled {
+            color: #ffc107; /* couleur des étoiles remplies */
+        }
     </style>
     <script src="index.js"></script>
     <script src="categorie.js"></script>
@@ -182,18 +191,21 @@
                                     <!-- Bouton Voir Détails sous la description tronquée -->
                                     <a href="#" class="btn btn-outline-primary btn-sm mt-2" style="font-size: 0.9rem;">Voir Détails</a>
                                 </div>
-                        
+
                                 <!-- Notes et Avis -->
                                 <div class="d-flex align-items-center mt-3">
                                     <div class="rating" style="font-size: 1.2rem; color: #ffc107;">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star-half-alt"></i>
-                                        <i class="far fa-star"></i>
+                                        <i class="far fa-star star" data-value="1"></i>
+                                        <i class="far fa-star star" data-value="2"></i>
+                                        <i class="far fa-star star" data-value="3"></i>
+                                        <i class="far fa-star star" data-value="4"></i>
+                                        <i class="far fa-star star" data-value="5"></i>
                                     </div>
-                                    <p class="ml-3 mb-0" style="font-size: 1rem;">Note Moyenne : <strong>4.5/5</strong> (20 avis)</p>
+                                    <p class="ml-3 mb-0" style="font-size: 1rem;">
+                                        Note Moyenne : <strong id="note">0/5</strong> (20 avis)
+                                    </p>
                                 </div>
+
                         
                                 <!-- Like et Commentaires -->
                                 <div class="like-comment mt-3 d-flex">

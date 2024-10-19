@@ -9,5 +9,5 @@ document.addEventListener('DOMContentLoaded', function () {
         //     const gif = document.getElementById('exploding-gif');
         //     gif.style.display = 'block';
         // }, 4000);  // 4 secondes après le début de l'animation du texte
-    }, 4000);  // 10 secondes de délai
+    }, 8000);  // 10 secondes de délai
 });

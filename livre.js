@@ -1,14 +1,6 @@
-// // Fonction pour lancer la lecture du PDF
-//         function lirePDF() {
-//             // Remplacer par le chemin ou l'URL de votre fichier PDF
-//             var pdfUrl = 'ThinkAndGrowRich.pdf';
+   // Ouvrir le PDF dans un nouvel onglet
+   // window.open(pdfUrl, '_blank');
 
-//             // Ouvrir le PDF dans un nouvel onglet
-//             // window.open(pdfUrl, '_blank');
-
-//             // Si tu veux afficher le PDF dans la même page, utilise ceci :
-//             window.location.href = pdfUrl;
-//         }
 
 
 function lirePDF(e) {
@@ -22,7 +14,7 @@ function lirePDF(e) {
     
     // 2. Initialise la requête pour effectuer une requête GET vers le fichier PHP check_auth.php
     xhr.open('GET', 'check_auth.php', true);
-    console.log(xhr);
+    //console.log(xhr);
     // 3. Définir ce qui va se passer une fois la réponse reçue (lorsque la requête a terminé)
     xhr.onload = function () {
         // 4. Si la requête est réussie et que le serveur a renvoyé le statut 200 (OK)
@@ -45,22 +37,67 @@ function lirePDF(e) {
 }
 
 
-        // fonction toggleLike pour gérer les like
+// fonction toggleLike pour gérer les like
 
 
-            function toggleLike(element) {
-                const icon = element.querySelector('i');
-                
-                // Vérifier si l'icône a déjà la classe "liked"
-                if (element.classList.contains('liked')) {
-                    // Si oui, enlever la classe "liked" et remettre l'icône vide (contour)
-                    icon.classList.remove('fas'); // Plein
-                    icon.classList.add('far'); // Contour
-                    element.classList.remove('liked');
-                } else {
-                    // Sinon, ajouter la classe "liked" et changer l'icône en version pleine
-                    icon.classList.remove('far'); // Contour
-                    icon.classList.add('fas'); // Plein
-                    element.classList.add('liked');
-                }
+function toggleLike(element) {
+    const icon = element.querySelector('i');
+    
+    element.addEventListener('click', function(e){
+        e.preventDefault();
+        e.stopPropagation();
+    });          
+    // Vérifier si l'icône a déjà la classe "liked"
+    if (element.classList.contains('liked')) {
+        // Si oui, enlever la classe "liked" et remettre l'icône vide (contour)
+        icon.classList.remove('fas'); // Plein
+        icon.classList.add('far'); // Contour
+        element.classList.remove('liked');
+    } else {
+        // Sinon, ajouter la classe "liked" et changer l'icône en version pleine
+        icon.classList.remove('far'); // Contour
+        icon.classList.add('fas'); // Plein
+        element.classList.add('liked');
+    }
+
+}            
+            
+// fonction pour donner une note/rating via les étoiles
+
+document.addEventListener('DOMContentLoaded', function () {
+    const stars = document.querySelectorAll('.star');
+    const noteElement = document.getElementById('note');
+    let currentRating = 0;
+
+    stars.forEach(star => {
+        // Ajout d'un événement au survol pour montrer une prévisualisation du rating
+        star.addEventListener('mouseover', function () {
+            const rating = this.getAttribute('data-value');
+            fillStars(rating);
+        });
+
+        // Retire la prévisualisation quand la souris quitte la zone
+        star.addEventListener('mouseout', function () {
+            fillStars(currentRating); // Affiche la note actuelle
+        });
+
+        // Capter le clic pour définir le rating
+        star.addEventListener('click', function () {
+            currentRating = this.getAttribute('data-value');
+            noteElement.innerHTML = `${currentRating}/5`; // Met à jour la note affichée
+        });
+    });
+
+    // Fonction pour remplir les étoiles en fonction de la note
+    function fillStars(rating) {
+        stars.forEach(star => {
+            if (star.getAttribute('data-value') <= rating) {
+                star.classList.remove('far');
+                star.classList.add('fas', 'filled');
+            } else {
+                star.classList.remove('fas', 'filled');
+                star.classList.add('far');
             }
+        });
+    }
+});
